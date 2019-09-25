@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <!-- Head -->
+	<head>
+		<title>Elements - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    </head>
+    <!-- Body -->
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Titulo -->
+					<header id="header">
+						<h1>Iniciar Sesion</h1>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+
+								<!-- Form -->
+									<section>
+										<form method="post" action="acceso.php">
+											<div class="row gtr-uniform">
+												<div class="col-12">
+													<h2>CI</h2>
+													<input type="text" name="ci" id="NumberTextInput" value="" placeholder="4568217" />
+                                                </div>
+                                                <div class="col-12">
+													<h2>Password</h2>
+													<input type="password" name="pass" id="pass" value="" placeholder="Contraseña"/>
+												</div>
+												<div class="col-12">
+													<ul class="actions">
+														<li><input type="submit" value="Enviar" class="primary" /></li>
+													</ul>
+												</div>
+											</div>
+                                        </form>
+                                    </section>
+							</section>
+					</div>
+            </div>
+
+        <!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>Aliquam sed mauris</h2>
+							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+							<ul class="actions">
+								<li><a href="#" class="button">Learn More</a></li>
+							</ul>
+						</section>
+						<section>
+							<h2>Etiam feugiat</h2>
+							<dl class="alt">
+								<dt>Address</dt>
+								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+								<dt>Phone</dt>
+								<dd>(000) 000-0000 x 0000</dd>
+								<dt>Email</dt>
+								<dd><a href="#">information@untitled.tld</a></dd>
+							</dl>
+							<ul class="icons">
+								<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+							</ul>
+						</section>
+						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+			<script>
+			//funcion para input type text permita solo numeros
+			function setInputFilter(textbox, inputFilter) {
+				["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+				textbox.addEventListener(event, function() {
+				if (inputFilter(this.value)) {
+					this.oldValue = this.value;
+					this.oldSelectionStart = this.selectionStart;
+					this.oldSelectionEnd = this.selectionEnd;
+				} else if (this.hasOwnProperty("oldValue")) {
+					this.value = this.oldValue;
+					this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+				}
+				});
+			});
+			}
+			// Install input filters.
+			setInputFilter(document.getElementById("NumberTextInput"), function(value) {
+			return /^\d*$/.test(value); });
+			</script>
+	</body>
+</html>

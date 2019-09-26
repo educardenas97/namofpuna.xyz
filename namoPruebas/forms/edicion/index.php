@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<title>Namofpuna</title>
+		<link rel="icon" type="image/ico" href="../../images/favicon.ico"/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
@@ -26,7 +27,7 @@
 
 								<table >
 							<?php
-										mostrarEdicion();	
+										mostrarEdicion();
               ?>
 							</table>
 
@@ -72,6 +73,7 @@
   			<script src="../../assets/js/main.js"></script>
 
   </body>
+</html>
 <?php
 function mostrarEdicion() {
 	include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');

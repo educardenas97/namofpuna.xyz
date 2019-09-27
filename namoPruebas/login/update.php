@@ -120,7 +120,7 @@ while( $rows = mysqli_fetch_array($res) )
 												<div class="col-12">
 													<ul class="actions">
 														<li><input type="submit" value="Enviar" class="primary" onclick="alerta()" /></li>
-														<li><input type="button" value="Salir" onclick="window.location.href='logout.php'" /></li>
+														<li><input type="button" value="Menu" onclick="window.location.href='main.php'" /></li>
 													</ul>
 												</div>
 											</div>

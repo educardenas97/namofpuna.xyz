@@ -7,7 +7,7 @@ session_start();
 $ci=$_POST['ci'];
 $pass=$_POST['pass'];
 //Conexion//
-include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
+require('conexion.php');
 mysqli_set_charset($conexion,"utf8");
 
 //Query//
@@ -16,12 +16,19 @@ $result=mysqli_query($conexion,$query) or die(mysql_error());
 
 //Verificacion//
 $rows = mysqli_num_rows($result);
+//Traemos su tipo de persona//
+while( $res = mysqli_fetch_array($result) )
+{
+	  $level=$res['tp_codigo'];
 
+}
+//aqui se hace la magia//
 if( $rows==1 )
 {
     $_SESSION['ci'] = $ci;
-    header("Location: update.php");
-
+    $_SESSION['level'] = $level;
+    header("Location: main.php");
+   
 }else
 {
     header("Location: login.html");

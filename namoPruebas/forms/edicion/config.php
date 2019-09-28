@@ -18,10 +18,8 @@
 			<header id="header">
         <h1>
         <?php
-				if(!isset($_SESSION)){
-						session_start(); 
-				}
-        $_SESSION["detalle"] = $_POST['edi_detalle'];
+				session_start();
+				$_SESSION["detalle"] = $_POST['edi_detalle'];
         $_SESSION["edi_codigo"] = $_POST['edicion'];
         print "$_SESSION[detalle]";
         ?>

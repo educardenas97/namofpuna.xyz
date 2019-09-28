@@ -1,4 +1,4 @@
-<?php 
+<?php
 //Conexion//
 require('conexion.php');
 mysqli_set_charset($conexion,"utf8");
@@ -33,7 +33,7 @@ if(!isset($_SESSION["ci"]))
 					<header id="header">
 						<h1>Menu Principal</h1>
                     </header>
-                    
+
 				<!-- Main -->
 					<div id="main">
 
@@ -45,12 +45,12 @@ if(!isset($_SESSION["ci"]))
                                             <?php
                                             if( $_SESSION['level']==3 )//staff
                                             {
-                                                echo" <li><a href='../../forms/edicion/index.php' class='button primary'>Edicion</a></li> ";
-                                            } 
+                                                echo" <li><a href='../forms/edicion/index.php' class='button primary'>Edicion</a></li> ";
+                                            }
                                             else if( $_SESSION['level']==1 )//voluntario
                                             {
-                                                echo" <li><a href='../../forms/participante/index.php' class='button primary'>Participante</a></li> ";
-                                            } 
+                                                echo" <li><a href='../forms/participante/index.php' class='button primary'>Participante</a></li> ";
+                                            }
                                             ?>
                                             <li><input type="button" value="Salir" onclick="window.location.href='logout.php'" /></li>
                                         </ul>

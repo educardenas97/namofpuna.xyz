@@ -23,11 +23,20 @@
 					?>
 					</p>
 					<?php
-					 echo"<form action='../edicion/config.php' method='post'>
-					<input name='edicion' type='hidden' value='$_SESSION[edi_codigo]'>
-					<input name='edi_detalle' type='hidden' value='$_SESSION[detalle]'>
-					<input type='submit' class='button small' value='Volver'>
-					</form>";?>
+					if( $_SESSION['level']==3 )//staff
+					{
+					echo "<form action='../edicion/config.php' method='post'>
+					 			<input name='edicion' type='hidden' value='$_SESSION[edi_codigo]'>
+					 			<input name='edi_detalle' type='hidden' value='$_SESSION[detalle]'>
+					 			<input type='submit' class='button small' value='Volver'>
+			 	 				</form>";
+					}
+					else if( $_SESSION['level']==1 )//voluntario
+					{
+							echo"<a href='../../login/main.php' class='button'>Volver</a>";
+					}
+					?>
+
 				</header>
 			<!-- Main -->
 			<div id="main">

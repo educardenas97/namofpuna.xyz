@@ -60,14 +60,12 @@
 
         <li><a href="https://www.facebook.com/%C3%91amomarandu-2037370486565235/" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
         <li><a href="https://www.instagram.com/namofpuna/" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
-
-
       </ul>
       </section>
       <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
       </footer>
-
       </div>
+
       <!-- Scripts -->
       <script src="../../assets/js/jquery.min.js"></script>
       <script src="../../assets/js/jquery.scrollex.min.js"></script>

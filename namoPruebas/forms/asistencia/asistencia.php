@@ -3,8 +3,9 @@
     <head>
         <title>Namofpuna</title>
         <?php
+            session_start();
             //$codigo=$_POST['edicion'];
-            $codigo=5;
+            $codigo=$_SESSION['edi_codigo'];
             $actividad=$_POST['asistencia'];
          ?>
 		<meta charset="utf-8" />
@@ -21,11 +22,18 @@
     <body class="is-preload">
         <!-- Wrapper -->
 			<div id="wrapper">
-                <header id="header">
+        <header id="header">
 					<h1>Registrar Asistencia</h1>
+          <input type="button" value="Volver" onclick="window.location.href='index.php'" />
 				</header>
                 <div id='main'>
                     <section id='content' class='main'>
+                        
+                        <select id="Filtro" <?php echo ($_SESSION['']==4)?"":"disabled"?>>
+                            <option value="0">Abuelos</option>
+                            <option value="1">Alumnos</option>
+                            <option value="2">Todos</option>
+                        </select>
                         <div class="center gtr-uniform">
                             <input type="hidden" name="codigo" id='codigo' value=<?php echo "'$codigo'"; ?>>
                             <input type="hidden" name="actividad" id='actividad' value=<?php echo "'$actividad'"; ?>>
@@ -52,7 +60,7 @@
             var valoresCond=[$("#codigo").val()]
             var idEdicion=$("#codigo").val();
             //alert("consultar");
-            $.post("Parametros/datosParticipante.php",{campos:camposP,tabla:"participante,persona,edicion",campoCondicion:camposCond,valores:valoresCond}, function(resultado) {
+            $.post("Parametros/datosParticipante.php",{campos:camposP,tabla:"participante,persona,edicion",campoCondicion:camposCond,valores:valoresCond,actCod:$("#actividad").val()}, function(resultado) {
                 console.log(resultado);
                 var res=JSON.parse(resultado);
                 for(var i=0;i<res.length;i++){
@@ -67,7 +75,7 @@
             var row=document.createElement('tr');
             var estado=document.createElement('td');
             estado.className='etiqueta';
-            /*if(verificarPresencia(datos[0])){
+            if(datos[3]!=null){
                 aux="presente";
                 estado.innerHTML=aux;
                 row.addEventListener('click',function() { eliminar(datos[0])})
@@ -76,7 +84,7 @@
                 row.addEventListener('click',function() { insertar(datos[0])})
                 aux="ausente";
                 estado.innerHTML=aux;
-            }*/
+            }
             row.className=aux+" eventoMouse";
 
             var colum1=document.createElement('td');

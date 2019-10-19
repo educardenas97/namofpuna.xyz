@@ -18,6 +18,7 @@
 			<header id="header">
 				<h1>Ediciones</h1>
 				<p>Ediciones realizadas y programadas hasta la fecha</p>
+				<input type="button" value="Volver" onclick="window.location.href='../../login/main.php'" />
 			</header>
 			<!-- Main -->
 				<div id="main">

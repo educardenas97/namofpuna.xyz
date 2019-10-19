@@ -1,6 +1,6 @@
-<?php 
+<?php
 //Conexion//
-require('conexion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
 mysqli_set_charset($conexion,"utf8");
 //Login//
 
@@ -32,7 +32,7 @@ while( $rows = mysqli_fetch_array($res) )
 ?>
 <html>
 	<head>
-		<title>Elements - Stellar by HTML5 UP</title>
+		<title>Namofpuna</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -52,8 +52,8 @@ while( $rows = mysqli_fetch_array($res) )
 				<!-- Header -->
 					<header id="header">
 						<h1>Datos</h1>
+						<input type="button" value="Volver" onclick="window.location.href='main.php'" />
 					</header>
-
 				<!-- Main -->
 					<div id="main">
 
@@ -73,7 +73,7 @@ while( $rows = mysqli_fetch_array($res) )
 												<div class="col-6 col-12-xsmall">
 												    <h2>Apellido</h2>
 													<input type="text" name="apellido" id="apellido" value="<?php echo $apellido; ?>" placeholder="Ipsum" />
-												</div>	
+												</div>
 												<div class="col-6 col-12-xsmall">
 												    <h2>Numero de Telefono</h2>
 													<input type="text" name="telefono" id="NumberTextInput" value="<?php echo $telefono; ?>" placeholder="0981475842" />
@@ -81,7 +81,7 @@ while( $rows = mysqli_fetch_array($res) )
 												<div class="col-6 col-12-xsmall">
 												    <h2>Contraseña</h2>
 													<input type="password" name="pass" id="password" class="password" data-toggle="password" value="<?php echo $pass; ?>" placeholder="Ipsum" />
-												</div>															
+												</div>
 												<div class="col-12">
 													<h2>Email</h2>
 													<input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder="ipsum@gmail.com" />
@@ -89,12 +89,12 @@ while( $rows = mysqli_fetch_array($res) )
 												<div class="col-6 col-12-xsmall">
 													<h2>Fecha de Nacimiento</h2>
 													<input type="date" name="fecha_nac" id="fecha_nac" value="<?php echo $fecha_nac; ?>" placeholder="" />
-												</div>	
+												</div>
 												<div class="col-6 col-12-xsmall">
 													<h2>Carrera</h2>
 													<select name="carrera" id="carrera">
-													<!--Traemos todas las carreras y ponemos selected al que tenia--> 
-													<?php 
+													<!--Traemos todas las carreras y ponemos selected al que tenia-->
+													<?php
 													$query="SELECT * FROM carrera ";
 													$res=mysqli_query($conexion,$query) or die(mysql_error());
 													while($rows = mysqli_fetch_array($res)){
@@ -120,46 +120,41 @@ while( $rows = mysqli_fetch_array($res) )
 												<div class="col-12">
 													<ul class="actions">
 														<li><input type="submit" value="Enviar" class="primary" onclick="alerta()" /></li>
-														<li><input type="button" value="Menu" onclick="window.location.href='main.php'" /></li>
 													</ul>
 												</div>
 											</div>
 										</form>
 									</section>
 
-				
+
 					</div>
 				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">Learn More</a></li>
-							</ul>
-						</section>
-						<section>
-							<h2>Etiam feugiat</h2>
-							<dl class="alt">
-								<dt>Address</dt>
-								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
-								<dt>Phone</dt>
-								<dd>(000) 000-0000 x 0000</dd>
-								<dt>Email</dt>
-								<dd><a href="#">information@untitled.tld</a></dd>
-							</dl>
-							<ul class="icons">
-								<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
-							</ul>
-						</section>
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-					</footer>
+				<footer id="footer">
+				<section>
+				<h2>Indicaciones</h2>
+				<p>- El numero de documento y el numero de telefono deben ir sin puntos de separación <br>
+					- Favor registrar correo electronico y fecha de nacimiento 
+				</p>
+				</section>
+				<section>
+				<h2>Ayuda</h2>
+				<dl class="alt">
+					<dt>Address</dt>
+					<dd>&bull; Facultad Politecnica UNA &bull; San Lorenzo</dd>
+					<dt>Phone</dt>
+					<dd>0982 908 639</dd>
+					<dt>Email</dt>
+					<dd><a href="#">eduardocardenas97@gmail.com</a></dd>
+				</dl>
+				<ul class="icons">
+					<li><a href="https://www.facebook.com/%C3%91amomarandu-2037370486565235/" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+					<li><a href="https://www.instagram.com/namofpuna/" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+				</ul>
+				</section>
+				<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+				</footer>
+				</div>
 
-			</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

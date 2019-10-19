@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<title>Namofpuna</title>
+		<link rel="icon" type="image/ico" href="../../images/favicon.ico"/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
@@ -17,8 +18,8 @@
 			<header id="header">
         <h1>
         <?php
-        session_start();
-        $_SESSION["detalle"] = $_POST['edi_detalle'];
+				session_start();
+				$_SESSION["detalle"] = $_POST['edi_detalle'];
         $_SESSION["edi_codigo"] = $_POST['edicion'];
         print "$_SESSION[detalle]";
         ?>
@@ -105,6 +106,7 @@
   			<script src="../../assets/js/main.js"></script>
 
   </body>
+</html>
   <?php
     function contarVoluntarios() {
 			$contar=0;

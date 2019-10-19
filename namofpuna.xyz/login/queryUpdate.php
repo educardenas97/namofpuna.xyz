@@ -1,6 +1,6 @@
-<?php 
+<?php
 //Conexion//
-require('conexion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
 mysqli_set_charset($conexion,"utf8");
 $ci=$_POST['ci'];
 $nombre=$_POST['nombre'];

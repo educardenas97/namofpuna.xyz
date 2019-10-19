@@ -16,11 +16,20 @@ $result=mysqli_query($conexion,$query) or die(mysql_error());
 
 //Verificacion//
 $rows = mysqli_num_rows($result);
-
+//Traemos su tipo de persona//
+while( $res = mysqli_fetch_array($result) )
+{
+	  $level=$res['tp_codigo'];
+		$personaCodigo=$res['per_codigo'];
+}
+//aqui se hace la magia//
 if( $rows==1 )
 {
     $_SESSION['ci'] = $ci;
-    header("Location: update.php");
+    $_SESSION['level'] = $level;
+		$_SESSION['per_codigo']  = $personaCodigo;
+		sessionEdicion($personaCodigo);
+    header("Location: main.php");
 
 }else
 {
@@ -28,4 +37,30 @@ if( $rows==1 )
 }
 
 mysqli_close($conexion);
+
+//corregir esta funcion
+function sessionEdicion($personaCodigo){
+	include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
+	$query="SELECT participante.edi_codigo as codigo,participante.fun_codigo as funcion FROM participante,persona,edicion
+	WHERE participante.per_codigo='$personaCodigo'
+	AND participante.edi_codigo=edicion.edi_codigo
+	AND persona.per_codigo=participante.per_codigo
+	ORDER BY participante.edi_codigo DESC";
+	$res=mysqli_query($conexion,$query);
+	while($rows = mysqli_fetch_assoc($res)):
+			print_r($rows);
+			$codigoEdicion=$rows['codigo'];
+			$_SESSION['fun_codigo'] = $rows['funcion'];
+
+			$query2="SELECT * FROM edicion WHERE edi_codigo=$codigoEdicion";
+			$res2=mysqli_query($conexion,$query2) or die(mysql_error());
+			while($rows2 = mysqli_fetch_array($res2)):
+					$_SESSION['edi_codigo'] = $rows2['edi_codigo'];
+					$_SESSION['detalle'] = $rows2['edi_detalle'];
+					break;
+			endwhile;
+			break;
+	endwhile;
+}
+
 ?>

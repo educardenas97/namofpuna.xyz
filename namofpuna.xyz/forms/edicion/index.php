@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<title>Namofpuna</title>
+		<link rel="icon" type="image/ico" href="../../images/favicon.ico"/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
@@ -17,6 +18,7 @@
 			<header id="header">
 				<h1>Ediciones</h1>
 				<p>Ediciones realizadas y programadas hasta la fecha</p>
+				<input type="button" value="Volver" onclick="window.location.href='../../login/main.php'" />
 			</header>
 			<!-- Main -->
 				<div id="main">
@@ -26,7 +28,7 @@
 
 								<table >
 							<?php
-										mostrarEdicion();	
+										mostrarEdicion();
               ?>
 							</table>
 
@@ -72,6 +74,7 @@
   			<script src="../../assets/js/main.js"></script>
 
   </body>
+</html>
 <?php
 function mostrarEdicion() {
 	include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');

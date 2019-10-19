@@ -132,7 +132,6 @@ function mostrarFunciones($funcion_detalle){
 			else {
 				echo "<option value='$codigo'>$detalle</option>";
 			}
-
     endwhile;
 }
 

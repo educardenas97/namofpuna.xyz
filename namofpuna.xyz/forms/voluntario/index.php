@@ -189,4 +189,13 @@ function mostrarCarrera() {
 				mostrarPersona($personaCodigo);
 		}
 	}
+
+	function contarPresentes($actividad) {
+	  include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
+	  $query="SELECT COUNT(asi_codigo) FROM `asistencia` WHERE act_codigo=$actividad";
+	  $res=mysqli_query($conexion,$query) or die(mysql_error());
+	    while($rows = mysqli_fetch_array($res)):
+	        echo " $rows[0]";
+	    endwhile;
+	}
 ?>

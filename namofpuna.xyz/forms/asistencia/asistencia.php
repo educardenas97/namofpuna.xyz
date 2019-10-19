@@ -3,8 +3,9 @@
     <head>
         <title>Namofpuna</title>
         <?php
+            session_start();
             //$codigo=$_POST['edicion'];
-            $codigo=5;
+            $codigo=$_SESSION['edi_codigo'];
             $actividad=$_POST['asistencia'];
          ?>
 		<meta charset="utf-8" />
@@ -21,11 +22,17 @@
     <body class="is-preload">
         <!-- Wrapper -->
 			<div id="wrapper">
-                <header id="header">
+        <header id="header">
 					<h1>Registrar Asistencia</h1>
+          <h2>Actividad</h2>
+          <input type="button" value="Volver" onclick="window.location.href='index.php'" />
 				</header>
                 <div id='main'>
                     <section id='content' class='main'>
+                        <center>Cantidad de Presentes: <?php contarPresentes($actividad) ?></center>
+                        <select id="Filtro" <?php echo ($_SESSION['']==4)?"":"disabled"?>>
+
+                        </select>
                         <div class="center gtr-uniform">
                             <input type="hidden" name="codigo" id='codigo' value=<?php echo "'$codigo'"; ?>>
                             <input type="hidden" name="actividad" id='actividad' value=<?php echo "'$actividad'"; ?>>
@@ -44,20 +51,48 @@
 
 
     </body>
+    <!-- Footer -->
+    	<footer id="footer">
+    		<section>
+    			
+    		</section>
+    		<section>
+    			<h2>Ayuda</h2>
+    			<dl class="alt">
+    				<dt>Address</dt>
+    				<dd>&bull; Facultad Politecnica UNA &bull; San Lorenzo</dd>
+    				<dt>Phone</dt>
+    				<dd>0982 908 639</dd>
+    				<dt>Email</dt>
+    				<dd><a href="#">eduardocardenas97@gmail.com</a></dd>
+    			</dl>
+    			<ul class="icons">
+
+    				<li><a href="https://www.facebook.com/%C3%91amomarandu-2037370486565235/" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+    				<li><a href="https://www.instagram.com/namofpuna/" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+
+
+    			</ul>
+    		</section>
+    		<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+    	</footer>
+
+    </div>
     <script>
+
         function consultar(){
             //var camposP=['par_codigo','(select per_nombre from persona where persona.per_codigo= participante.per_codigo AND (tp_codigo=3 OR tp_codigo=1))  ','(select per_apellido from persona where persona.per_codigo= participante.per_codigo AND (tp_codigo=3 OR tp_codigo=1))  '];
-            var camposP=['participante.par_codigo','persona.per_nombre','persona.per_apellido'];
+            var camposP=['participante.par_codigo','persona.per_apellido','persona.per_nombre'];
             var camposCond=['participante.edi_codigo'];
             var valoresCond=[$("#codigo").val()]
             var idEdicion=$("#codigo").val();
             //alert("consultar");
-            $.post("Parametros/datosParticipante.php",{campos:camposP,tabla:"participante,persona,edicion",campoCondicion:camposCond,valores:valoresCond}, function(resultado) {
+            $.post("Parametros/datosParticipante.php",{campos:camposP,tabla:"participante,persona,edicion",campoCondicion:camposCond,valores:valoresCond,actCod:$("#actividad").val()}, function(resultado) {
                 console.log(resultado);
                 var res=JSON.parse(resultado);
                 for(var i=0;i<res.length;i++){
                     if(res[i][1]!=null && res[i][1]!='null'){
-                        crearTabla(res[i])
+                          crearTabla(res[i])
                     }
                 }
              });
@@ -67,7 +102,7 @@
             var row=document.createElement('tr');
             var estado=document.createElement('td');
             estado.className='etiqueta';
-            /*if(verificarPresencia(datos[0])){
+            if(datos[3]!=null){
                 aux="presente";
                 estado.innerHTML=aux;
                 row.addEventListener('click',function() { eliminar(datos[0])})
@@ -76,7 +111,7 @@
                 row.addEventListener('click',function() { insertar(datos[0])})
                 aux="ausente";
                 estado.innerHTML=aux;
-            }*/
+            }
             row.className=aux+" eventoMouse";
 
             var colum1=document.createElement('td');
@@ -133,3 +168,16 @@
         consultar();
     </script>
 </html>
+
+<?php
+function contarPresentes($actividad) {
+  $contar=0;
+  include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
+  $query="SELECT COUNT(asi_codigo) FROM `asistencia` WHERE act_codigo=$actividad";
+  $res=mysqli_query($conexion,$query) or die(mysql_error());
+    while($rows = mysqli_fetch_array($res)):
+        echo " $rows[0]";
+    endwhile;
+
+}
+?>

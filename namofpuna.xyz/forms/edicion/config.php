@@ -63,6 +63,21 @@
                   <li><a href="" class="button small disabled">Ver</a></li>
                 </ul>
 								</td></tr>
+
+								<tr><td>
+									<h2>Reportes</h2>
+                	<ul class="actions">
+	                  <li><a href="../funcion/funcion.php" class="primary button small">Ver</a></li>
+	                  <li><a href="../funcion/agregar_funcion.php" class="button small">Descargar</a></li>
+									</ul>
+								</td>
+
+                <td><h2>Estadisticas</h2>
+                <ul class="actions">
+                  <li><a href="" class="button primary small">Resumen</a></li>
+                  <li><a href="" class="button small">Live(beta)</a></li>
+                </ul>
+								</td></tr>
               </table>
 							</div>
               </section>

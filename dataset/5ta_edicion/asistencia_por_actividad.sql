@@ -5,4 +5,4 @@ SELECT COUNT(asistencia.par_codigo) FROM asistencia INNER JOIN (participante,act
   persona.tp_codigo<>2)
   GROUP BY (asistencia.act_codigo)
   ORDER BY (asistencia.act_codigo) ASC
-  /*Codigo para contar las personas que participaron en cada actividad*/
+  /*Codigo para contar las personas quze participaron en cada actividad*/

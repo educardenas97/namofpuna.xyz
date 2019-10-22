@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Pagina para visualizar los voluntarios
+	Pagina para visualizar los voluntarios y su asistencia durante la edicion
 -->
 <html>
 	<head>
@@ -14,9 +14,8 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<header id="header">
-					<h1>Voluntarios</h1>
+					<h1>Lista de Presencia</h1>
 					<p><?php
 					session_start();
 					print "$_SESSION[detalle]";
@@ -29,13 +28,17 @@
 					<input type='submit' class='button small' value='Volver'>
 					</form>";?>
 				</header>
+
+
+
 			<!-- Main -->
 			<div id="main">
 			<!-- Content -->
 				<section id="content" class="main">
 					<div class="center gtr-uniform"><!--Formulario-->
-            <table><?php
-            mostrarVoluntarios();
+            <table>
+            <?php
+            mostrarCarrera();
             ?></table>
           </div>
           </section>
@@ -78,34 +81,21 @@
       </body>
 </html>
 <?php
-function mostrarVoluntarios(){
-include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
-$query="SELECT * FROM participante,edicion,persona
-WHERE participante.edi_codigo=$_SESSION[edi_codigo] AND participante.edi_codigo=edicion.edi_codigo AND persona.per_codigo=participante.per_codigo
-AND (persona.tp_codigo=1 OR persona.tp_codigo=3) ORDER BY persona.per_apellido ASC";
-$res=mysqli_query($conexion,$query) or die(mysql_error());
-  while($rows = mysqli_fetch_array($res)):
-      $personaCodigo=$rows['per_codigo'];
-      $query2="SELECT * FROM persona WHERE per_codigo=$personaCodigo ";
-      $res2=mysqli_query($conexion,$query2) or die(mysql_error());
-        while($rows2 = mysqli_fetch_array($res2)):
-          $personaCi=$rows2['per_ci'];
-          $personaNombre=$rows2['per_nombre'];
-          $personaApellido=$rows2['per_apellido'];
-          $personaCarrera=$rows2['car_codigo'];
-          $carreraNombre=mostrarCarrera($personaCarrera);
-          echo "<tr><td>$personaCi</td><td>$personaApellido</td><td>$personaNombre</td><td>$carreraNombre</td></tr>";
-      endwhile;
-  endwhile;
-}
-
-function mostrarCarrera($carreraCodigo){
+function mostrarCarrera(){
+  $c=0;
   include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
-  $query="SELECT * FROM carrera WHERE car_codigo=$carreraCodigo";
+  $query="SELECT * FROM carrera ";
   $res=mysqli_query($conexion,$query) or die(mysql_error());
     while($rows = mysqli_fetch_array($res)):
+        $codigo=$rows['car_codigo'];
         $descripcion=$rows['car_detalle'];
-        return $descripcion;
+        $c++;
+        echo"<tr><td>$c</td><td>$descripcion</td>
+        <td><form action='asistencia_por_carrera.php' method='post'>
+        <input name='carreraCodigo' type='hidden' value='$codigo'>
+        <input name='carreraDescripcion' type='hidden' value='$descripcion'>
+        <input type='submit' class='button small' value='Ver'>
+        </form></td></tr>  ";
     endwhile;
 }
 ?>

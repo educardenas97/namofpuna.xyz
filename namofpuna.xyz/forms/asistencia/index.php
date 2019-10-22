@@ -78,6 +78,7 @@
     	</footer>
 
     </div>
+    </html>
     <?php
     function crearTabla($consulta){
         global $conexion;

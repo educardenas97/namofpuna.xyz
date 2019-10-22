@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Pagina para visualizar los voluntarios
+	Pagina para visualizar los voluntarios y su asistencia durante la edicion
 -->
 <html>
 	<head>
@@ -14,28 +14,30 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<header id="header">
-					<h1>Voluntarios</h1>
+					<h1>Lista de Presencia</h1>
 					<p><?php
+          $carreraCodigo= $_POST['carreraCodigo'];
+          $carreraDescripcion = $_POST['carreraDescripcion'];
+
 					session_start();
-					print "$_SESSION[detalle]";
+					print "$_SESSION[detalle] - $carreraDescripcion";
 					?>
 					</p>
-					<?php
-					 echo"<form action='../edicion/config.php' method='post'>
-					<input name='edicion' type='hidden' value='$_SESSION[edi_codigo]'>
-					<input name='edi_detalle' type='hidden' value='$_SESSION[detalle]'>
-					<input type='submit' class='button small' value='Volver'>
-					</form>";?>
+					<input type="button" value="Volver" onclick="window.location.href='carreras.php'" />
 				</header>
+
+
+
 			<!-- Main -->
 			<div id="main">
 			<!-- Content -->
 				<section id="content" class="main">
 					<div class="center gtr-uniform"><!--Formulario-->
-            <table><?php
-            mostrarVoluntarios();
+            <table>
+            <center><tr><th>N</td><th>CI</td><th>APELLIDO</th><th>NOMBRE</th><th>HS EXT</th></tr></center>
+            <?php
+            mostrarAsistencia($carreraCodigo);
             ?></table>
           </div>
           </section>
@@ -78,34 +80,39 @@
       </body>
 </html>
 <?php
-function mostrarVoluntarios(){
-include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
-$query="SELECT * FROM participante,edicion,persona
-WHERE participante.edi_codigo=$_SESSION[edi_codigo] AND participante.edi_codigo=edicion.edi_codigo AND persona.per_codigo=participante.per_codigo
-AND (persona.tp_codigo=1 OR persona.tp_codigo=3) ORDER BY persona.per_apellido ASC";
-$res=mysqli_query($conexion,$query) or die(mysql_error());
-  while($rows = mysqli_fetch_array($res)):
-      $personaCodigo=$rows['per_codigo'];
-      $query2="SELECT * FROM persona WHERE per_codigo=$personaCodigo ";
-      $res2=mysqli_query($conexion,$query2) or die(mysql_error());
-        while($rows2 = mysqli_fetch_array($res2)):
-          $personaCi=$rows2['per_ci'];
-          $personaNombre=$rows2['per_nombre'];
-          $personaApellido=$rows2['per_apellido'];
-          $personaCarrera=$rows2['car_codigo'];
-          $carreraNombre=mostrarCarrera($personaCarrera);
-          echo "<tr><td>$personaCi</td><td>$personaApellido</td><td>$personaNombre</td><td>$carreraNombre</td></tr>";
-      endwhile;
-  endwhile;
-}
-
-function mostrarCarrera($carreraCodigo){
+function mostrarAsistencia($carreraCodigo){
+  $ACTIVIDAD=7; //Actividad excluida del filtro
+  $TP_PERSONA=2; //participantes
+  $c=0;
   include($_SERVER['DOCUMENT_ROOT'] . '/conexion.php');
-  $query="SELECT * FROM carrera WHERE car_codigo=$carreraCodigo";
+  $query="SELECT persona.per_ci,persona.per_apellido,persona.per_nombre,tip_persona.tp_codigo FROM persona
+          INNER JOIN (participante,asistencia,actividad,edicion,tip_persona,carrera)
+          ON (persona.per_codigo=participante.per_codigo
+              AND persona.tp_codigo=tip_persona.tp_codigo
+              AND tip_persona.tp_codigo<>$TP_PERSONA
+              AND carrera.car_codigo=persona.car_codigo
+              AND carrera.car_codigo=$carreraCodigo
+              AND participante.par_codigo=asistencia.par_codigo
+              AND asistencia.act_codigo=actividad.act_codigo
+              AND actividad.edi_codigo=edicion.edi_codigo
+              AND edicion.edi_codigo=$_SESSION[edi_codigo]
+              AND actividad.act_codigo<>$ACTIVIDAD)
+          GROUP BY persona.per_codigo
+          ORDER BY(persona.per_apellido) ASC";
   $res=mysqli_query($conexion,$query) or die(mysql_error());
-    while($rows = mysqli_fetch_array($res)):
-        $descripcion=$rows['car_detalle'];
-        return $descripcion;
-    endwhile;
+  while($rows = mysqli_fetch_array($res)):
+      $nombre=$rows['per_nombre'];
+      $ci=$rows['per_ci'];
+      $apellido=$rows['per_apellido'];
+      $tpPersona=$rows['tp_codigo'];
+      $c++;
+      if ($tpPersona==3) {
+        echo "<tr><td>$c</td><td>$ci</td><td>$apellido</td><td>$nombre</td><td>30</td></tr>";
+      }
+      else {
+        echo "<tr><td>$c</td><td>$ci</td><td>$apellido</td><td>$nombre</td><td>10</td></tr>";
+      }
+
+  endwhile;
 }
 ?>

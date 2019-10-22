@@ -57,7 +57,7 @@
 									</ul>
 								</td>
 
-                <td><h2>Actividaddes</h2>
+                <td><h2>Actividades</h2>
                 <ul class="actions">
                   <li><a href="" class="button primary small disabled">Agregar</a></li>
                   <li><a href="" class="button small disabled">Ver</a></li>
@@ -66,16 +66,18 @@
 
 								<tr><td>
 									<h2>Reportes</h2>
+									<li>Lista general de asistencia</li>
+									<li>Filtro por carreras</li>
                 	<ul class="actions">
-	                  <li><a href="../funcion/funcion.php" class="primary button small">Ver</a></li>
-	                  <li><a href="../funcion/agregar_funcion.php" class="button small">Descargar</a></li>
+	                  <li><a href="../reporte/index.php" class="primary button small">General</a></li>
+	                  <li><a href="../reporte/carreras.php" class="button small">Carreras</a></li>
 									</ul>
 								</td>
 
                 <td><h2>Estadisticas</h2>
                 <ul class="actions">
-                  <li><a href="" class="button primary small">Resumen</a></li>
-                  <li><a href="" class="button small">Live(beta)</a></li>
+                  <li><a href="" class="button primary small disabled">Resumen</a></li>
+                  <li><a href="" class="button small disabled">Live(beta)</a></li>
                 </ul>
 								</td></tr>
               </table>
